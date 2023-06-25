@@ -1,7 +1,7 @@
 <template>
-    <header class="app-footer">
+    <footer class="app-footer">
         <h4>Bitcoin App - Gideon Levinson 2023 created with VUE</h4>
-    </header>
+    </footer>
 </template>
 
 <script>
@@ -14,6 +14,6 @@ export default {
     border-top: 1px solid var(--color-border);
     padding-top: 1rem;
     margin-top: 2rem;
-     text-align: center;
+    text-align: center;
 }
 </style>

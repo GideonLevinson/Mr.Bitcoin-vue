@@ -1,11 +1,8 @@
 <template>
+  <Hero />
   <main class="home-page">
-    <section class="user-balance">
-      <h2>Hello <span>{{ user.name }}</span></h2>
-      <h3>Your balance is:<span> $ {{ user.balance }}</span></h3>
-    </section>
     <section class="market">
-      <h3>Bitcoin rate: <span>$ {{ bitcoinRate }}</span></h3>
+      <h3>Bitcoin rate: <span>$1 = ฿{{ bitcoinRate }}</span></h3>
     </section>
   </main>
 </template>
@@ -13,6 +10,8 @@
 <script>
 import { bitcoinService } from '@/services/bitcoin.service.js'
 import { userService } from '@/services/user.service.js'
+
+import Hero from '../cmps/Hero.vue'
 
 export default {
   data() {
@@ -24,6 +23,9 @@ export default {
   async created() {
     this.user = userService.getUser()
     this.bitcoinRate = await bitcoinService.getRate()
+  },
+  components: {
+    Hero,
   }
 }
 </script>
@@ -32,7 +34,7 @@ export default {
 .home-page {
   .user-balance {
     margin-top: 1rem;
-
+    
     h3 {
       margin-top: .8rem;
       span {
