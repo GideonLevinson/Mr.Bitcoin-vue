@@ -16,3 +16,10 @@ function createEventEmitter(defaultHandler = null){
     }
 }
 export const eventBus = createEventEmitter(() => console.log('No handler found...'))
+
+export function showSuccessMsg(txt) {
+    eventBus.emit('user-msg',{txt, type: 'success'})
+}
+export function showErrorMsg(txt) {
+    eventBus.emit('user-msg',{txt, type: 'fail'})
+}

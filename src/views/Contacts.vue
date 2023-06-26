@@ -1,36 +1,35 @@
 <template>
-    <UserMsg />
-  <h1>Contacts</h1>
-  <ContactFilter @filter="onSetFilterBy" />
-  <ContactList @delete="deleteContact" v-if="contacts" :contacts="filteredContacts" />
+    <h1>Contacts List</h1>
+    <ContactFilter @filter="onSetFilterBy" />
+    <ContactList @remove="removeContact" v-if="contacts" :contacts="filteredContacts" />
 </template>
 
 <script>
-import {contactService} from '@/services/contact.service.js'
-import { eventBus } from '@/services/eventBus.service.js'
+import { showSuccessMsg, showErrorMsg } from '@/services/eventBus.service.js'
 
 import UserMsg from '@/cmps/UserMsg.vue'
-import  ContactList  from '@/cmps/ContactList.vue'
+import ContactList from '@/cmps/ContactList.vue'
 import ContactFilter from '@/cmps/ContactFilter.vue'
 
 export default {
     data() {
         return {
-            contacts: null,
+            // contacts: null,
             filterBy: {},
         }
     },
+    async created() {
+        this.$store.dispatch({ type: 'loadContacts' })
+        // this.contacts = await contactService.getContacts()
+    },
     methods: {
-        async deleteContact(contactId) {
-            const msg = {
-                txt: `Contact ${contactId} deleted...`,
-                type: 'success',
-            }
-            await contactService.deleteContact(contactId)
-
-            const idx = this.contacts.findIndex(contact => contact._id === contactId)
-            this.contacts.splice(idx, 1)
-            eventBus.emit('user-msg', msg)
+        async removeContact(contactId) {
+          try {
+            this.$store.dispatch({ type: 'removeContact', contactId })
+            showSuccessMsg(`Contact ${contactId} successfully removed`)
+           } catch(err) {
+            showErrorMsg('Cannot remove contact')
+           }
         },
         onSetFilterBy(filterBy) {
             this.filterBy = filterBy
@@ -39,12 +38,18 @@ export default {
     computed: {
         filteredContacts() {
             const regex = new RegExp(this.filterBy.txt, 'i')
-            return this.contacts.filter(contact => regex.test(contact.name))
-        }
+            const filteredContacts = this.contacts.filter(contact => {
+                return (
+                    regex.test(contact.name) ||
+                    regex.test(contact.email) ||
+                    regex.test(contact.phone)
+                )
+            })
+            return filteredContacts
+        },
+        contacts() { return this.$store.getters.contacts }
     },
-    async created() {
-        this.contacts = await contactService.getContacts()
-    },
+  
     components: {
         ContactList,
         ContactFilter,
@@ -54,6 +59,4 @@ export default {
 
 </script>
 
-<style lang="scss">
-  
-</style>
+<style lang="scss"></style>

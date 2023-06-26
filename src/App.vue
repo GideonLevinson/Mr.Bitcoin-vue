@@ -14,10 +14,10 @@ export default {
 
 <template>
   <AppHeader />
+  <UserMsg />
   <main class="main-content">
     <RouterView />
   </main>
-  <UserMsg />
   <AppFooter />
 </template>
 

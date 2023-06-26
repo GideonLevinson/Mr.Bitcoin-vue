@@ -1,6 +1,5 @@
 <template>
     <section class="contact-list">
-        <h1>Contact List</h1>
         <TransitionGroup name="list" tag="ul">
             <li v-for="contact in contacts" :key="contact._id">
                 <ContactPreview :contact="contact" />
@@ -28,7 +27,7 @@ export default {
     },
     methods: {
         onRemoveContact(contactId) {
-            this.$emit('delete', contactId)
+            this.$emit('remove', contactId)
         }
     },
     components: {
@@ -44,7 +43,7 @@ export default {
 /* apply transition to moving elements */
 .list-enter-active,
 .list-leave-active {
-    transition: all 2.8s ease;
+    transition: all 1.6s ease;
 }
 
 .list-enter-from,
@@ -67,7 +66,6 @@ export default {
         gap: 20px;
         padding: 0px;
         list-style: none;
-
 
         li {
             padding: 1em;

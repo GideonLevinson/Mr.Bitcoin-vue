@@ -12,8 +12,6 @@ export const bitcoinService = {
   getAvgBlockSize,
 }
 
-// let cachedData = 0.00003322
-
 async function getRate() {
   const bitcoinRate = gBitcoinData.bitcoinRate
   const lastRequest = gBitcoinData?.bitcoinRate?.reqTimeStamp
@@ -37,25 +35,6 @@ async function getRate() {
     }
   }
 }
-
-// async function getMarketPriceHistory() {
-//   try {
-//     const response = await axios.get(
-//       "https://api.blockchain.info/charts/market-price",
-//       {
-//         params: {
-//           timespan: "5months",
-//           format: "json",
-//           cors: true,
-//         },
-//       }
-//     )
-//     return response.data
-//   } catch (error) {
-//     console.error("Error fetching market price history:", error)
-//     throw error
-//   }
-// }
 
 async function getMarketPriceHistory() {
   const priceHistory = gBitcoinData.priceHistory
@@ -83,25 +62,6 @@ async function getMarketPriceHistory() {
     }
   }
 }
-
-// async function getAvgBlockSize() {
-//   try {
-//     const response = await axios.get(
-//       "https://api.blockchain.info/charts/avg-block-size",
-//       {
-//         params: {
-//           timespan: "5months",
-//           format: "json",
-//           cors: true,
-//         },
-//       }
-//     )
-//     return response.data
-//   } catch (error) {
-//     console.error("Error fetching average block size:", error)
-//     throw error
-//   }
-// }
 
 async function getAvgBlockSize() {
   const avgBlockSize = gBitcoinData.avgBlockSize

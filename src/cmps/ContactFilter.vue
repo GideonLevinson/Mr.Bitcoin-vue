@@ -1,7 +1,6 @@
 <template>
     <section class="contact-filter">
-        <p>Search: </p>
-        <input @input="onSetFilterBy" v-model="filterBy.txt" type="text">
+        <input @input="onSetFilterBy" v-model="filterBy.txt" type="text" placeholder="Search...">
     </section>
 </template>
 
@@ -23,5 +22,12 @@ export default {
 </script>
 
 <style lang="scss">
-
+.contact-filter {
+    input {
+      margin: 1rem 0;
+      padding: .5rem;
+      font-size: 1.2rem;
+      border-radius: 8px;
+    }
+}
 </style>

@@ -39,9 +39,17 @@ export default {
 </script>
 
 <style lang="scss">
-/* we will explain what these classes do next! */
+
 .user-msg {
     transform-origin: right;
+
+    &.success {
+        color: hsla(160, 100%, 37%, 1);
+    }
+    
+    &.fail {
+        color: hsla(0, 100%, 50%, 1);
+    }
 }
 .v-enter-active,
 .v-leave-active {

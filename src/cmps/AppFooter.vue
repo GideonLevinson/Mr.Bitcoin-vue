@@ -15,5 +15,9 @@ export default {
     padding-top: 1rem;
     margin-top: 2rem;
     text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: var(--color-background);
 }
 </style>
