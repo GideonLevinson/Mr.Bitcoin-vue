@@ -1,7 +1,11 @@
 <template>
     <h1>Contacts List</h1>
     <ContactFilter @filter="onSetFilterBy" />
-    <ContactList @remove="removeContact" v-if="contacts" :contacts="filteredContacts" />
+    <ContactList  @remove="removeContact" v-if="contacts?.length" :contacts="filteredContacts" />
+    <section v-else>
+        <h1>You have no contacts... <span>Add one now</span></h1> 
+        
+        </section>
 </template>
 
 <script>
@@ -14,13 +18,11 @@ import ContactFilter from '@/cmps/ContactFilter.vue'
 export default {
     data() {
         return {
-            // contacts: null,
             filterBy: {},
         }
     },
     async created() {
         this.$store.dispatch({ type: 'loadContacts' })
-        // this.contacts = await contactService.getContacts()
     },
     methods: {
         async removeContact(contactId) {

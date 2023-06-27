@@ -3,6 +3,9 @@
     <h1>Edit</h1>
     <h2>coming soon....</h2>
   </section>
+  <RouterLink to="/contact">
+            <button>Back</button>
+        </RouterLink>
 </template>
 
 <script>

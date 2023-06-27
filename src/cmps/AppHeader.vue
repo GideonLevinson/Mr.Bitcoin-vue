@@ -51,17 +51,23 @@ export default {
         },
     },
     methods: {
-        watchRoutePath() {
-            if (this.$route.path === "/") {
-                this.isSignupPage = true
-            } else {
-                this.isSignupPage = false
-            }
-        },
+    watchRoutePath() {
+      if (this.$route.path === "/") {
+        this.isSignupPage = true;
+      } else {
+        this.isSignupPage = false;
+      }
     },
-    watch: {
-        "$route.path": "watchRoutePath",
+  },
+  watch: {
+    "$route.path": "watchRoutePath",
+    "$store.state.user.user": {
+      handler(newUser) {
+        this.user = newUser;
+      },
+      immediate: true,
     },
+  },
 }
 </script>
 
